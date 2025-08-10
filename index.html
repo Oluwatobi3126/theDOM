@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us</title>
+  <style>
+  
+    @font-face {
+    font-family: 'Karla';
+    src: url('assets/fonts/Karla-VariableFont_wght.ttf') format('truetype');
+    font-weight: 50 500; /* Variable font weight range */
+    font-style: normal;
+}
+
+    body {
+      font-family: 'KarlaItalic', sans-serif;
+      background-color: #e6f3e6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 50px;
+    }
+    .form-container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+      position: relative;
+    }
+    h2 {
+      color: #1a3c34;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .name-group {
+      display: flex;
+      gap: 10px;
+    }
+    .name-group .form-group {
+      flex: 1;
+    }
+    input[type="text"], input[type="email"], textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+	.form-group:hover input,
+      .form-group:hover textarea {
+        border-color: #2e7d32;
+      }
+	input:focus,
+      textarea:focus {
+        background-color: white;
+        border-color: #1a3c34;
+        outline: none;
+        box-shadow: 0 0 5px rgba(26, 60, 52, 0.3);
+      }
+	  .radio-option input[type="radio"]:checked + span,
+.radio-option:has(input[type="radio"]:checked) {
+  background-color: #e6f3e6;
+}
+/* Make the actual radio circle green */
+input[type="radio"]:checked {
+  accent-color: green; /* works in most modern browsers */
+}
+/* Optional: Green outline when focusing via keyboard */
+.radio-option input[type="radio"]:focus + span,
+.radio-option:has(input[type="radio"]:focus) {
+  outline: 2px solid #2e7d32;
+}
+	  
+    .radio-group {
+      display: flex;
+      gap: 10px;
+    }
+    .radio-option {
+      display: flex;
+      align-items: center;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      flex: 1;
+    }
+    .radio-option input[type="radio"] {
+      margin-right: 10px;
+    }
+    input[type="checkbox"] {
+      margin-right: 10px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #1a3c34;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover, button:focus {
+      background-color: #13322a;
+      outline: 2px solid #2e7d32;
+    }
+    .error {
+      color: #d32f2f;
+      font-size: 0.8em;
+      margin-top: 5px;
+      display: none; 
+    }
+    .error-message {
+  border: 1px solid #d32f2f !important;
+    background-color: #fffafa;  
+}
+
+    #success-toast {
+      display: none;
+      background-color: #1a3c34;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      text-align: center;
+      position: absolute;
+      top: -40px;
+      left: 0;
+      right: 0;
+      font-size: 0.9em;
+    }
+    #success-toast::before {
+      content: "✔";
+      margin-right: 5px;
+    }
+    @media (max-width: 480px) {
+      .form-container {
+        padding: 15px;
+      }
+      .name-group {
+        flex-direction: column;
+        gap: 15px;
+      }
+      .radio-group {
+        flex-direction: column;
+      }
+      .radio-option {
+        width: 94%;
+      }
+      #success-toast {
+        top: -35px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <div id="success-toast"></div>
+    <h2 style="text-align:left">Contact Us</h2>
+    <form id="contact-form" novalidate>
+      <div class="form-group name-group">
+        <div class="form-group">
+          <label for="first-name">First Name *</label>
+          <input type="text" id="first-name" name="first-name"  required aria-required="true">
+          <div class="error" id="first-name-error">This field is required</div>
+        </div>
+        <div class="form-group">
+          <label for="last-name">Last Name *</label>
+          <input type="text" id="last-name" name="last-name" required aria-required="true">
+          <div class="error" id="last-name-error">This field is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address *</label>
+        <input type="email" id="email" name="email" required aria-required="true">
+        <div class="error" id="email-error">Please enter a valid email address</div>
+      </div>
+      <div class="form-group">
+        <label>Query Type *</label>
+        <div class="radio-group" role="radiogroup" id="radi" aria-required="true">
+          <label class="radio-option"><input type="radio" name="query-type" value="general" required> General Enquiry</label>
+          <label class="radio-option"><input type="radio" name="query-type" value="support"> Support Request</label>
+        </div>
+        <div class="error" id="query-type-error">Please select a query type</div>
+      </div>
+      <div class="form-group">
+        <label for="message">Message *</label>
+        <textarea id="message" name="message" rows="4" required aria-required="true"></textarea>
+        <div class="error" id="message-error">This field is required</div>
+      </div>
+      <div class="form-group">
+        <label><input type="checkbox" id="consent" name="consent" required> I consent to being contacted by the team *</label>
+        <div class="error" id="consent-error">To submit this form, please consent to being contacted</div>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+  
+  document.addEventListener("DOMContentLoaded", function () {
+        const fields = document.querySelectorAll("input, textarea");
+        fields.forEach(field => {
+          field.addEventListener("paste", e => e.preventDefault()); // Block paste
+          field.addEventListener("copy", e => e.preventDefault());  // Block copy
+          field.addEventListener("cut", e => e.preventDefault());   // Block cut
+        });
+		
+		 email.addEventListener('input', checkemail);
+		 const firstName = document.getElementById('first-name');
+
+		firstName.addEventListener('input', checkFirstName);
+		
+		 const lastName = document.getElementById('last-name');
+
+		lastName.addEventListener('input', checkLastName);
+		
+		const radio = document.getElementById('radi');
+
+		radio.addEventListener('input', checkRadio);
+		
+		const message = document.getElementById('message');
+
+		message.addEventListener('input', checkMessage);
+		
+		const consent = document.getElementById('consent');
+
+		consent.addEventListener('input', checkConsent);
+
+      });
+
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      let isValid = true;
+
+      // Reset errors
+      document.querySelectorAll('.error').forEach(error => error.style.display = 'none');
+      document.querySelectorAll('input, textarea').forEach(input => input.classList.remove('error-message'));
+
+      // Validate fields
+      const firstName = document.getElementById('first-name');
+      if (!firstName.value) {
+        document.getElementById('first-name-error').style.display = 'block';
+        firstName.classList.add('error-message');
+        isValid = false;
+      }
+
+      const lastName = document.getElementById('last-name');
+      if (!lastName.value) {
+        document.getElementById('last-name-error').style.display = 'block';
+        lastName.classList.add('error-message');
+        isValid = false;
+      }
+
+      const email = document.getElementById('email');
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email.value || !emailPattern.test(email.value)) {
+        document.getElementById('email-error').style.display = 'block';
+        email.classList.add('error-message');
+        isValid = false;
+      }
+
+      const queryType = document.querySelector('input[name="query-type"]:checked');
+      if (!queryType) {
+        document.getElementById('query-type-error').style.display = 'block';
+        isValid = false;
+      }
+
+      const message = document.getElementById('message');
+      if (!message.value) {
+        document.getElementById('message-error').style.display = 'block';
+        message.classList.add('error-message');
+        isValid = false;
+      }
+
+      const consent = document.getElementById('consent');
+      if (!consent.checked) {
+        document.getElementById('consent-error').style.display = 'block';
+        isValid = false;
+      }
+
+      if (isValid) {
+        document.getElementById('success-toast').textContent = 'Message Sent! Thanks for completing the form. We\'ll be in touch soon!';
+        document.getElementById('success-toast').style.display = 'block';
+        this.reset();
+        setTimeout(() => document.getElementById('success-toast').style.display = 'none', 5000);
+      }
+    });
+	
+	  // Validation function
+     function checkemail() {
+    const email = document.getElementById('email');
+    const emailError = document.getElementById('email-error');
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!email.value || !emailPattern.test(email.value)) {
+        emailError.style.display = 'block';
+        email.classList.add('error-message');
+        return false;
+    } else {
+        emailError.style.display = 'none';
+        email.classList.remove('error-message');
+        return true;
+    }
+}
+
+function checkFirstName() {
+  const firstname = document.getElementById('first-name');
+  const error = document.getElementById('first-name-error');
+
+  if (!firstname.value.trim()) {
+    error.style.display = 'block';
+    firstname.classList.add('error-message');
+    firstname.classList.remove('success-message');
+    return false;
+  } else {
+    error.style.display = 'none';
+    firstname.classList.remove('error-message');
+    firstname.classList.add('success-message');
+    return true;
+  }
+}
+
+function checkLastName() {
+  const lastname = document.getElementById('last-name');
+  const error = document.getElementById('last-name-error');
+
+  if (!lastname.value.trim()) {
+    error.style.display = 'block';
+    lastname.classList.add('error-message');
+    lastname.classList.remove('success-message');
+    return false;
+  } else {
+    error.style.display = 'none';
+    lastname.classList.remove('error-message');
+    lastname.classList.add('success-message');
+    return true;
+  }
+}
+
+
+function checkRadio() {
+  const radios = document.querySelectorAll('input[name="query-type"]');
+  const error = document.getElementById('query-type-error');
+  let isSelected = false;
+
+  radios.forEach(radio => {
+    if (radio.checked) {
+      isSelected = true;
+    }
+  });
+
+  if (!isSelected) {
+    error.style.display = 'inline';
+    return false;
+  } else {
+    error.style.display = 'none';
+    return true;
+  }
+}
+
+
+
+function checkMessage() {
+    const message = document.getElementById('message');
+    const messageError = document.getElementById('message-error');
+    let isValid = true;
+
+    if (!message.value.trim()) {
+        messageError.style.display = 'block';
+        message.classList.add('error-message');
+        isValid = false;
+    } else {
+        messageError.style.display = 'none';
+        message.classList.remove('error-message');
+    }
+
+    return isValid;
+}
+
+function checkConsent() {
+    const radios = document.getElementsByName("consent");
+    const errorMsg = document.getElementById("consent-error");
+    let selected = false;
+
+    for (let radio of radios) {
+        if (radio.checked) {
+            selected = true;
+            break;
+        }
+    }
+
+    if (selected) {
+        errorMsg.style.display = "none";
+    } else {
+        errorMsg.style.display = "block";
+    }
+}
+  </script>
+</body>
+</html>
