@@ -1,7 +1,7 @@
 # theDOM
 In the beginning, there was a DOM.
 
-🛠 Technologies Used
+## 🛠 Technologies Used
 
 - HTML5 – Form structure.
 
@@ -9,7 +9,7 @@ In the beginning, there was a DOM.
 
 - JavaScript – Validation and interactivity.
 
-✨ Features
+## ✨ Features
 
 - Responsive Design – Works across desktop and mobile devices
 
