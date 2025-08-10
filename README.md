@@ -2,8 +2,9 @@
 In the beginning, there was a DOM.
 
 🛠 Technologies Used
-HTML5 – Form structure.
 
-CSS – Styling, responsive layout, and visual feedback.
+- HTML5 – Form structure.
 
-JavaScript – Validation and interactivity.
+- CSS – Styling, responsive layout, and visual feedback.
+
+- JavaScript – Validation and interactivity.
